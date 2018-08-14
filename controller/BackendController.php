@@ -2,100 +2,136 @@
 
 require_once('dao/NoteDao.php');
 require_once('dao/CommentDao.php');
+require_once('service/ConnectionService.php');
 
 
 class BackendController
-{  
+{
     private $noteDao;
-     private $commentDao;
-    
-     public function __construct()
+    private $commentDao;
+    private $connectionService;
+
+    public function __construct()
     {
         $this->noteDao = new NoteDao();
-         $this->commentDao = new CommentDao();
+        $this->commentDao = new CommentDao();
+        $this->connectionService = new ConnectionService();
     }
 
-    
+
     public function adminHome()
-    {       
-         $notesHeader = $this->noteDao->findAll();
-        $notes=$notesHeader;
-            
-       
-        
-        
-         require('view/adminHome.php'); 
-           
-        } 
-    
-     public function updateNoteDisplay($noteId)
-    {       
-         $notesHeader = $this->noteDao->findAll();  
-         $note=$this->noteDao->findById($noteId);
-                       
-         require('view/updateNoteDisplay.php'); 
-           
+    {
+        if ($this->connectionService->isConnected()) {
+            $notesHeader = $this->noteDao->findAll();
+            $notes = $notesHeader;
+
+
+            require('view/adminHome.php');
+        } else {
+            header('Location: ?action=loginDisplay');
         }
-    
-     
-    
-     public function deleteNote($noteId)
-    {       
-         $this->noteDao->delete($noteId);  
-           header('Location:?action=adminHome');
-        } 
-    
-      public function manageCommentsDisplay($noteId)
-    {       
-         $notesHeader = $this->noteDao->findAll();
-          $comments=$this->commentDao->findNotifiedComments($noteId);
-          
-                       
-         require('view/manageCommentsDisplay.php'); 
-           
-        } 
-    
-      public function addNoteDisplay()
-    {       
-         $notesHeader = $this->noteDao->findAll();  
-         
-         require('view/addNoteDisplay.php'); 
-           
-        } 
-    
-      public function addNote($title,$content)
-    {       
-         $this->noteDao->create($title,$content);  
-             
-        
-          header('Location:?action=adminHome');
-           
-        } 
-    
-      public function updateNote($title,$content,$noteId)
-    {       
-         $this->noteDao->update($title,$content,$noteId);               
-                       
-        header('Location:?action=adminHome');
-           
+
+    }
+
+    public function updateNoteDisplay($noteId)
+    {
+        if ($this->connectionService->isConnected()) {
+            $notesHeader = $this->noteDao->findAll();
+            $note = $this->noteDao->findById($noteId);
+
+            require('view/updateNoteDisplay.php');
+        } else {
+            header('Location: ?action=loginDisplay');
         }
-    
-     public function keepComment($commentId,$noteId)
-    {    
-        
-         $this->commentDao->keep($commentId);               
-                       
-        header('Location:?action=manageCommentsDisplay&noteId='.$noteId);
-           
+
+    }
+
+
+    public function deleteNote($noteId)
+    {
+        if ($this->connectionService->isConnected()) {
+            $this->noteDao->delete($noteId);
+            header('Location:?action=adminHome');
+        } else {
+            header('Location: ?action=loginDisplay');
         }
-    
-     public function removeComment($commentId,$noteId)
-    {       
-         $this->commentDao->delete($commentId);               
-                       
-        header('Location:?action=manageCommentsDisplay&noteId='.$noteId);
-           
+    }
+
+    public function manageCommentsDisplay($noteId)
+    {
+        if ($this->connectionService->isConnected()) {
+            $notesHeader = $this->noteDao->findAll();
+            $comments = $this->commentDao->findNotifiedComments($noteId);
+
+            require('view/manageCommentsDisplay.php');
+        } else {
+            header('Location: ?action=loginDisplay');
         }
-    
-    
+
+    }
+
+    public function addNoteDisplay()
+    {
+        if ($this->connectionService->isConnected()) {
+            $notesHeader = $this->noteDao->findAll();
+
+            require('view/addNoteDisplay.php');
+        } else {
+            header('Location: ?action=loginDisplay');
+        }
+
+
+    }
+
+    public function addNote($title, $content)
+    {
+        if ($this->connectionService->isConnected()) {
+            $this->noteDao->create($title, $content);
+
+
+            header('Location:?action=adminHome');
+        } else {
+            header('Location: ?action=loginDisplay');
+        }
+
+    }
+
+    public function updateNote($title, $content, $noteId)
+    {
+        if ($this->connectionService->isConnected()) {
+            $this->noteDao->update($title, $content, $noteId);
+
+            header('Location:?action=adminHome');
+        } else {
+            header('Location: ?action=loginDisplay');
+        }
+
+    }
+
+    public function keepComment($commentId, $noteId)
+    {
+        if ($this->connectionService->isConnected()) {
+            $this->commentDao->keep($commentId);
+
+            header('Location:?action=manageCommentsDisplay&noteId=' . $noteId);
+        } else {
+            header('Location: ?action=loginDisplay');
+        }
+
+    }
+
+    public function removeComment($commentId, $noteId)
+    {
+        if ($this->connectionService->isConnected()) {
+            $this->commentDao->delete($commentId);
+
+            header('Location:?action=manageCommentsDisplay&noteId=' . $noteId);
+
+        } else {
+            header('Location: ?action=loginDisplay');
+        }
+
+    }
+
+
 }

@@ -20,6 +20,12 @@ SET time_zone = "+00:00";
 -- Base de données :  `projet4`
 --
 
+CREATE TABLE `user` (
+  `id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `pseudo` varchar(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 -- --------------------------------------------------------
 
 --
@@ -27,7 +33,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `comment` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `author` varchar(255) NOT NULL,
@@ -43,7 +49,7 @@ CREATE TABLE `comment` (
 --
 
 CREATE TABLE `notes` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -55,6 +61,7 @@ CREATE TABLE `notes` (
 
 INSERT INTO `notes` (`id`, `title`, `content`, `date`) VALUES
 (1, 'Le grand départ', 'C\'est aujourd\'hui que je m\'apprête à quitter la France pour l\'Alaska; une aventure dont je rêvais depuis longtemps, depuis l\'enfance.', '2018-06-24 14:14:05');
+
 
 --
 -- Index pour les tables exportées

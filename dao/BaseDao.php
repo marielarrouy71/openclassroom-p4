@@ -5,6 +5,7 @@ class BaseDao{
 
     public function __construct(){
 
-        $this->db=mysqli_connect('localhost','root','','projet4');
+        $this->db=mysqli_connect('localhost','root',
+                                 '','projet4');
     }
 }

@@ -61,7 +61,7 @@ class FrontendController
     {
         $user = $this->userDao->findByPseudo($pseudo);
         if (password_verify($password, $user->getPassword())) {
-            setcookie('projet4', 'projet4', time() + 30);
+            setcookie('projet4', 'projet4', time() + 3600);
             header('Location: ?action=adminHome');
         } else {
             header('Location: ?action=loginDisplay');

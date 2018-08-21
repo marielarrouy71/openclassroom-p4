@@ -59,14 +59,10 @@
                     <label for="author">Nom ou pseudo</label>
                     <input type="text" class="form-control" name="author" placeholder="Gustave Flaubert">
                 </div>
-
+                <button type="submit" class="btn btn-primary">Envoyer</button>
 
             </form>
-            <div>
 
-
-                <button type="submit" class="btn btn-primary">Envoyer</button>
-            </div>
         </div>
 
 

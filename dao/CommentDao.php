@@ -53,7 +53,7 @@ class CommentDao extends BaseDao
     public function create($title,$content,$author,$noteId)
     {
         $query=$this->db->prepare("insert into comment(title,content,author,date,is_notified,note_id) values(?,?,?,NOW(),0,?)  ");
-        $query->bind_param('ssss',$title,$content,$author,$articleId);
+        $query->bind_param('ssss',$title,$content,$author,$noteId);
 $query->execute();
 
     }

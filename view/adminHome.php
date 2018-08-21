@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Admin</title>
     <link href="public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="public/style.css" rel="stylesheet">
     <script src="public/jquery.js"></script>
     <script src="public/bootstrap/js/bootstrap.min.js"></script>
 </head>
@@ -38,11 +39,11 @@
 
                 </td>
                 <td>
-
-                    <?php 
+                    <div class="adminArticleContent">
+                        <?php 
                 echo $note->getContent();
                 ?>
-
+                    </div>
                 </td>
                 <td>
                     <a href="?action=updateNoteDisplay&noteId=<?php echo $note->getId();?>" class="btn btn-primary">Modifier</a>

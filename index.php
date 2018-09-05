@@ -93,3 +93,8 @@ if ($_GET['action'] === 'login') {
     $frontendController->login($_POST['pseudo'], $_POST['password']);
     return;
 }
+
+if ($_GET['action'] === 'logout') {
+     $backendController->logout();
+    return;
+}

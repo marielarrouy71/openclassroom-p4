@@ -66,6 +66,7 @@
 
         </table>
         <a href="?action=addNoteDisplay" class="btn btn-primary">Ajouter une note</a>
+        <a href="?action=logout" class="btn btn-danger">Se déconnecter</a>
     </div>
 
 </body>

@@ -132,6 +132,16 @@ class BackendController
         }
 
     }
+    
+     public function logout()
+    {
+        
+            $this->connectionService->logout();
+           
+            header('Location: ?action=loginDisplay');
+        
+
+    }
 
 
 }
